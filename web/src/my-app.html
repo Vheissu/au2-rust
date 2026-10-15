@@ -1,0 +1,33 @@
+<import from="./components/note-form"></import>
+
+<main>
+  <header>
+    <h1>au2-rust</h1>
+    <p>
+      Aurelia 2 in the browser, Axum on the server. The rules in
+      <code>crates/core</code> run in both places: compiled to WebAssembly for
+      this form and linked natively into the API, so they cannot drift apart.
+    </p>
+  </header>
+
+  <section aria-labelledby="new-note">
+    <h2 id="new-note">New note</h2>
+    <note-form save.bind="draft => add(draft)"></note-form>
+  </section>
+
+  <section aria-labelledby="saved-notes">
+    <h2 id="saved-notes">Saved notes</h2>
+    <p class="error" if.bind="loadError">${loadError}</p>
+    <p class="hint" if.bind="!loadError && !notes.length">Nothing saved yet.</p>
+    <ol class="notes" if.bind="notes.length">
+      <li repeat.for="note of notes; key: id">
+        <div class="note-head">
+          <h3>${note.title}</h3>
+          <button type="button" class="quiet" click.trigger="remove(note)">Delete</button>
+        </div>
+        <code>/notes/${note.slug}</code>
+        <p if.bind="note.body">${note.body}</p>
+      </li>
+    </ol>
+  </section>
+</main>

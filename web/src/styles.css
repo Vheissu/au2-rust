@@ -1,0 +1,230 @@
+/*
+ * Plain ink on paper, like a printed manual. No accent colour; the only
+ * hue is the error red, and it only appears when something is wrong.
+ * Delete freely when you start your own design.
+ */
+
+:root {
+  --paper: #f6f4ef;
+  --ink: #1c1b19;
+  --muted: #67645d;
+  --rule: #d6d2c8;
+  --field: #fffdf8;
+  --error: #9c2b23;
+
+  --text: Charter, "Bitstream Charter", "Sitka Text", Cambria, serif;
+  --code: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #161614;
+    --ink: #e8e5dd;
+    --muted: #9b978d;
+    --rule: #34322d;
+    --field: #1d1d1a;
+    --error: #e58a7f;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font: 1.0625rem/1.55 var(--text);
+  -webkit-font-smoothing: antialiased;
+}
+
+main {
+  max-width: 40rem;
+  margin: 0 auto;
+  padding: 3rem 1rem 5rem;
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.2;
+  margin: 0;
+}
+
+h1 {
+  font-size: 2rem;
+}
+
+h2 {
+  font-size: 1.25rem;
+  padding-top: 2.5rem;
+  margin-bottom: 1.25rem;
+  border-top: 1px solid var(--rule);
+}
+
+h3 {
+  font-size: 1.0625rem;
+}
+
+header {
+  margin-bottom: 2.5rem;
+}
+
+header p {
+  color: var(--muted);
+  margin: 0.75rem 0 0;
+}
+
+code {
+  font-family: var(--code);
+  font-size: 0.875em;
+  overflow-wrap: anywhere;
+}
+
+section + section {
+  margin-top: 3rem;
+}
+
+/* Form */
+
+.field {
+  margin-bottom: 1.5rem;
+}
+
+.field-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 0.375rem;
+}
+
+label {
+  font-weight: 700;
+}
+
+.count {
+  font-variant-numeric: tabular-nums;
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+
+.count.over {
+  color: var(--error);
+}
+
+input,
+textarea {
+  display: block;
+  width: 100%;
+  padding: 0.5rem 0.625rem;
+  font: inherit;
+  color: inherit;
+  background: var(--field);
+  border: 1px solid var(--muted);
+  border-radius: 2px;
+}
+
+textarea {
+  resize: vertical;
+}
+
+input:focus-visible,
+textarea:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
+
+[aria-invalid="true"] {
+  border-color: var(--error);
+}
+
+.hint,
+.error {
+  margin: 0.375rem 0 0;
+  font-size: 0.9375rem;
+}
+
+.hint {
+  color: var(--muted);
+}
+
+.error {
+  color: var(--error);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem 1rem;
+}
+
+button {
+  font: inherit;
+  font-weight: 700;
+  color: var(--paper);
+  background: var(--ink);
+  border: 1px solid var(--ink);
+  border-radius: 2px;
+  padding: 0.5rem 1.125rem;
+  cursor: pointer;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: progress;
+}
+
+button.quiet {
+  font-weight: 400;
+  font-size: 0.9375rem;
+  color: var(--muted);
+  background: none;
+  border: none;
+  padding: 0;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+button.quiet:hover {
+  color: var(--ink);
+}
+
+/* Saved notes */
+
+.notes {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.notes li {
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.notes li:first-child {
+  padding-top: 0;
+}
+
+.note-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+}
+
+.notes code {
+  color: var(--muted);
+}
+
+.notes p {
+  margin: 0.5rem 0 0;
+  white-space: pre-line;
+}

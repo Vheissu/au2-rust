@@ -1,0 +1,43 @@
+<form class="note-form" novalidate submit.trigger:prevent="submit()">
+  <div class="field">
+    <div class="field-head">
+      <label for="note-title">Title</label>
+      <span id="note-title-count" class="count" over.class="titleLength > limits.titleMaxChars">
+        ${titleLength} / ${limits.titleMaxChars}
+      </span>
+    </div>
+    <input
+      id="note-title"
+      name="title"
+      autocomplete="off"
+      value.bind="title"
+      aria-invalid.bind="!!titleError & attr"
+      aria-describedby="note-title-count note-title-hint note-title-error">
+    <p id="note-title-hint" class="hint">
+      Saved at <code>/notes/${slug || '…'}</code>
+    </p>
+    <p id="note-title-error" class="error" if.bind="titleError">${titleError}</p>
+  </div>
+
+  <div class="field">
+    <div class="field-head">
+      <label for="note-body">Body</label>
+      <span id="note-body-count" class="count" over.class="bodyLength > limits.bodyMaxChars">
+        ${bodyLength} / ${limits.bodyMaxChars}
+      </span>
+    </div>
+    <textarea
+      id="note-body"
+      name="body"
+      rows="5"
+      value.bind="body"
+      aria-invalid.bind="!!bodyError & attr"
+      aria-describedby="note-body-count note-body-error"></textarea>
+    <p id="note-body-error" class="error" if.bind="bodyError">${bodyError}</p>
+  </div>
+
+  <div class="actions">
+    <button type="submit" disabled.bind="isSaving">${isSaving ? 'Saving…' : 'Save note'}</button>
+    <p class="error" if.bind="failure" role="alert">${failure}</p>
+  </div>
+</form>
