@@ -1,0 +1,20 @@
+[package]
+name = "au2-rust-core"
+description = "Domain types and rules shared by the server and the browser."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+
+[features]
+# Derives TypeScript declarations for the shared types. Only the wasm crate
+# turns this on, so the server never compiles wasm-bindgen.
+typescript = ["dep:tsify", "dep:wasm-bindgen"]
+
+[dependencies]
+serde.workspace = true
+tsify = { workspace = true, optional = true }
+wasm-bindgen = { workspace = true, optional = true }
+
+[dev-dependencies]
+serde_json.workspace = true

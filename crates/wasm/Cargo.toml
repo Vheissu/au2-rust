@@ -1,0 +1,16 @@
+[package]
+name = "au2-rust-wasm"
+description = "WebAssembly bindings that expose au2-rust-core to the browser."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish = false
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+au2-rust-core = { workspace = true, features = ["typescript"] }
+tsify.workspace = true
+wasm-bindgen.workspace = true

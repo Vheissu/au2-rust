@@ -1,0 +1,35 @@
+[workspace]
+resolver = "3"
+members = ["crates/core", "crates/server", "crates/wasm"]
+# `cargo build`/`cargo test` at the root skip the wasm crate. It only makes
+# sense for wasm32-unknown-unknown and is built by `npm run wasm` in web/.
+default-members = ["crates/core", "crates/server"]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.85"
+license = "MIT"
+
+[workspace.dependencies]
+au2-rust-core = { path = "crates/core" }
+axum = "0.8"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+tokio = { version = "1", features = ["macros", "rt-multi-thread", "signal"] }
+tower = { version = "0.5", features = ["util"] }
+tower-http = { version = "0.7", features = ["fs", "trace"] }
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+tsify = { version = "0.5.8", default-features = false, features = ["js"] }
+# The wasm-bindgen CLI must match this version exactly. Pinned with `=` so
+# `cargo update` never moves it out from under the installed CLI.
+wasm-bindgen = "=0.2.129"
+
+[profile.release]
+lto = true
+codegen-units = 1
+
+# Smaller .wasm without slowing down the server build.
+[profile.release.package.au2-rust-wasm]
+opt-level = "s"

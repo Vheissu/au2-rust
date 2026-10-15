@@ -1,0 +1,21 @@
+[package]
+name = "au2-rust-server"
+description = "JSON API that also serves the built Aurelia app."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish = false
+
+[dependencies]
+au2-rust-core.workspace = true
+axum.workspace = true
+serde.workspace = true
+tokio.workspace = true
+tower-http.workspace = true
+tracing.workspace = true
+tracing-subscriber.workspace = true
+
+[dev-dependencies]
+serde_json.workspace = true
+tower.workspace = true
